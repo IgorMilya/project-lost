@@ -1,5 +1,4 @@
 import { UserService } from "./usersService.js";
-import { serialize } from 'cookie';
 
 const getAll = async (req, res) => {
   try {
@@ -52,44 +51,16 @@ const registration = async (req, res) => {
   }
 };
 
-// const login = async (req, res) => {
-//   try {
-//     const data = await UserService.login(req.body);
-//
-//     res.cookie("refreshToken", data.refreshToken, {
-//       maxAge: 30 * 24 * 60 * 60 * 1000,
-//       httpOnly: true,
-//       sameSite: "none",
-//       secure: true,
-//     });
-//     res.json({ data: data.data, accessToken: data.accessToken });
-//   } catch (err) {
-//     res.status(500).json(err.message);
-//   }
-// };
-//
-// const logout = async (req, res) => {
-//   try {
-//     const data = await UserService.logout(req.cookies);
-//
-//     res.clearCookie("refreshToken");
-//     res.json(data);
-//   } catch (err) {
-//     res.status(500).json(err.message);
-//   }
-// };
 const login = async (req, res) => {
   try {
     const data = await UserService.login(req.body);
 
-    const refreshTokenCookie = serialize('refreshToken', data.refreshToken, {
+    res.cookie("refreshToken", data.refreshToken, {
       maxAge: 30 * 24 * 60 * 60 * 1000,
       httpOnly: true,
-      sameSite: 'none',
+      sameSite: "none",
       secure: true,
     });
-
-    res.setHeader('Set-Cookie', refreshTokenCookie);
     res.json({ data: data.data, accessToken: data.accessToken });
   } catch (err) {
     res.status(500).json(err.message);
@@ -100,14 +71,8 @@ const logout = async (req, res) => {
   try {
     const data = await UserService.logout(req.cookies);
 
-    const deleteRefreshTokenCookie = serialize('refreshToken', '', {
-      maxAge: -1,
-      httpOnly: true,
-      sameSite: 'none',
-      secure: true,
-    });
+    res.clearCookie("refreshToken");
 
-    res.setHeader('Set-Cookie', deleteRefreshTokenCookie);
     res.json(data);
   } catch (err) {
     res.status(500).json(err.message);
