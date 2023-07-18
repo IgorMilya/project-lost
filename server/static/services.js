@@ -3,7 +3,7 @@ import { readFile } from 'fs'
 
 const getFile = async params => {
   const { dirName, fileName } = params
-  const filePath = path.join(process.cwd(), 'service/static', dirName, fileName)
+  const filePath = path.join(process.cwd(), '/server/static', dirName, fileName)
 
   return await new Promise((resolve, reject) => {
     readFile(filePath, 'utf-8', (err, data) => {
