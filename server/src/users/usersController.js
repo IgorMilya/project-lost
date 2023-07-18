@@ -1,106 +1,105 @@
-import { UserService } from "./usersService.js";
+import { UserService } from './usersService.js'
 
 const getAll = async (req, res) => {
   try {
-    const data = await UserService.getAll(req.query);
-    res.json(data);
+    const data = await UserService.getAll(req.query)
+    res.json(data)
   } catch (err) {
-    res.status(500).json(err.message);
+    res.status(500).json(err.message)
   }
-};
+}
 
 const getByID = async (req, res) => {
   try {
-    const data = await UserService.getByID(req.params.userId);
-    res.json(data);
+    const data = await UserService.getByID(req.params.userId)
+    res.json(data)
   } catch (err) {
-    res.status(500).json(err.message);
+    res.status(500).json(err.message)
   }
-};
+}
 
 const getUsersLogin = async (req, res) => {
   try {
-    const data = await UserService.getUsersLogin();
+    const data = await UserService.getUsersLogin()
 
-    res.json(data);
+    res.json(data)
   } catch (err) {
-    res.status(500).json(err.message);
+    res.status(500).json(err.message)
   }
-};
+}
 
 const update = async (req, res) => {
   try {
     const data = await UserService.update({
       id: req.params.userId,
       updateData: req.body,
-    });
+    })
 
-    res.json(data);
+    res.json(data)
   } catch (err) {
-    res.status(500).json(err.message);
+    res.status(500).json(err.message)
   }
-};
+}
 
 const registration = async (req, res) => {
   try {
-    await UserService.registration(req?.body, req?.authUser);
+    await UserService.registration(req?.body, req?.authUser)
 
-    res.json({ data: "Registration success" });
+    res.json({ data: 'Registration success' })
   } catch (err) {
-    res.status(500).json(err.message);
+    res.status(500).json(err.message)
   }
-};
+}
 
 const login = async (req, res) => {
   try {
-    const data = await UserService.login(req.body);
+    const data = await UserService.login(req.body)
 
-    res.cookie("refreshToken", data.refreshToken, {
+    res.cookie('refreshToken', data.refreshToken, {
       maxAge: 30 * 24 * 60 * 60 * 1000,
       httpOnly: true,
-      sameSite: "none",
+      sameSite: 'none',
       secure: true,
-    });
-    res.json({ data: data.data, accessToken: data.accessToken });
+    })
+    res.json({ data: data.data, accessToken: data.accessToken })
   } catch (err) {
-    res.status(500).json(err.message);
+    res.status(500).json(err.message)
   }
-};
-
+}
 const logout = async (req, res) => {
   try {
-    const data = await UserService.logout(req.cookies);
+    const data = await UserService.logout(req.cookies)
 
     res.clearCookie('refreshToken', {
-      domain: 'folks-food.vercel.app', // Replace with your actual domain folks-food.vercel.app
+      domain: '.folks-food.vercel.app',
       path: '/',
       secure: true,
       httpOnly: true,
       sameSite: 'none',
-    });
+    })
 
-    res.json(data);
+    res.json(data)
   } catch (err) {
-    res.status(500).json(err.message);
+    res.status(500).json(err.message)
   }
-};
+}
 
 const refresh = async (req, res) => {
   try {
-    const data = await UserService.refresh(req.cookies);
+    const data = await UserService.refresh(req.cookies)
 
-    res.cookie("refreshToken", data.refreshToken, {
+    res.cookie('refreshToken', data.refreshToken, {
       maxAge: 30 * 24 * 60 * 60 * 1000,
       httpOnly: true,
-      sameSite: "none",
+      sameSite: 'none',
       secure: true,
-    });
+    })
 
-    res.json({ data: data.data, accessToken: data.accessToken });
+    res.json({ data: data.data, accessToken: data.accessToken })
   } catch (err) {
-    res.status(err.statusCode || 500).json(err.message);
+    res.status(err.statusCode || 500).json(err.message)
   }
-};
+}
 
 export const UserController = {
   getAll,
@@ -111,4 +110,4 @@ export const UserController = {
   login,
   logout,
   refresh,
-};
+}
