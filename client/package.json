@@ -9,8 +9,7 @@
     "preview": "vite preview",
     "test": "vitest --watch=false",
     "lint": "eslint --ext .ts,.tsx --fix .",
-    "types": "tsc --noEmit",
-    "prepare": "husky install"
+    "types": "tsc --noEmit"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",
