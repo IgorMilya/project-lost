@@ -26,4 +26,5 @@ yarn.lock
 .env
 .eslintignore
 .eslintrc.cjs
-package-lock.json
+package-lock.json!/.env
+!/.env
