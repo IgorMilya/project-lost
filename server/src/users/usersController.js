@@ -70,9 +70,14 @@ const login = async (req, res) => {
 const logout = async (req, res) => {
   try {
     const data = await UserService.logout(req.cookies);
+    res.cookie("refreshToken", '', {
+      maxAge: -1,
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+    });
 
     res.clearCookie("refreshToken");
-
     res.json(data);
   } catch (err) {
     res.status(500).json(err.message);
