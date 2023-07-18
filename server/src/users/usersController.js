@@ -72,7 +72,7 @@ const logout = async (req, res) => {
     const data = await UserService.logout(req.cookies);
 
     res.clearCookie("refreshToken", {
-      domain: "https://folks-restaurant.vercel.app", // Replace with your actual Vercel domain
+      domain: ".folks-restaurant.vercel.app", // Replace with your actual Vercel domain
       path: "/", // Set the cookie path to ensure it is cleared for all paths
     });
 
