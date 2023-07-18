@@ -71,17 +71,13 @@ const logout = async (req, res) => {
   try {
     const data = await UserService.logout(req.cookies);
 
-    res.clearCookie("refreshToken", {
-      domain: ".vercel.app", // Replace with your actual Vercel domain
-      path: "/", // Set the cookie path to ensure it is cleared for all paths
-    });
+    res.clearCookie("refreshToken");
 
     res.json(data);
   } catch (err) {
     res.status(500).json(err.message);
   }
 };
-
 
 const refresh = async (req, res) => {
   try {
