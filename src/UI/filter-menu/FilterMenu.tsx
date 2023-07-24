@@ -25,19 +25,18 @@ const FilterMenu: FC<FilterMenuProps> = ({
 
   const handleChangeFilter = (value: string) => {
     const withoutAllCategory = filterItems.filter((item) => item !== 'all')
+
     if (value === 'all') {
       setFilterItems(['all'])
       onChange(['all'])
-    } else if (filterItems.some((item) => item === value)) {
-      setFilterItems((prevState) => prevState.filter((item) => item !== value))
+    } else if (filterItems.includes(value)) {
+      setFilterItems(filterItems.filter((item) => item !== value))
       onChange(filterItems.filter((item) => item !== value))
     } else if (filterMenuItems?.length === withoutAllCategory.length + 1) {
       setFilterItems(['all'])
       onChange(['all'])
     } else {
-      setFilterItems((prevState) => {
-        return [...prevState.filter((item) => item !== 'all'), value]
-      })
+      setFilterItems([...filterItems.filter((item) => item !== 'all'), value])
       onChange([...filterItems.filter((item) => item !== 'all'), value])
     }
   }
