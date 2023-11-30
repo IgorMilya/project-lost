@@ -5,10 +5,10 @@
 </div>
   
 
-[**Folks**](folks-food.vercel.app/) It is the App for Restaurants, It caters to three positions: Administrator, Waiter, and Delivery.
+[**Folks**](https://folks-food.vercel.app/) It is the App for Restaurants, It caters to three positions: Administrator, Waiter, and Delivery.
 The app empowers restaurant staff with tools for managing orders, payments, and deliveries, resulting in an improved dining experience.
 
-Link to deployed app: [folks-food.vercel.app](folks-food.vercel.app/)
+Link to deployed app: [folks-food.vercel.app](https://folks-food.vercel.app/)
 
 ### Languages and Tools:
 
