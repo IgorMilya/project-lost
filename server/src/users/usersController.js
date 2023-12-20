@@ -71,6 +71,13 @@ const logout = async (req, res) => {
   try {
     const data = await UserService.logout(req.cookies);
 
+    res.cookie("refreshToken", data.refreshToken, {
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+    });
+
     res.clearCookie("refreshToken");
 
     res.json(data);
